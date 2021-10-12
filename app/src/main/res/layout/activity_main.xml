@@ -24,7 +24,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:custom_trackWidth="10dp"
         app:custom_trackColor="@color/trackColor"
-        app:custom_progressColor="@color/progressColor"/>
+        app:custom_progressColor="@color/progressColor"
+        app:custom_progress="5000"
+        app:custom_max="10000"/>
     <TextView
         android:id="@+id/step_count_title"
         android:layout_width="wrap_content"
