@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="circular_progress_size">140dp</dimen>
+    <dimen name="circular_progress_image_size">120dp</dimen>
+    <dimen name="circular_progress_size">240dp</dimen>
 </resources>
