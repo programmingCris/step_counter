@@ -7,7 +7,10 @@
         <entry key="app/src/main/res/drawable/app_bg.xml" value="0.15260416666666668" />
         <entry key="app/src/main/res/drawable/ic_running.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/app_permission_dialog.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/layout/exit_dialog.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/fit_error_dialog.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/fit_permission_dialog.xml" value="0.13645833333333332" />
       </map>
     </option>
   </component>

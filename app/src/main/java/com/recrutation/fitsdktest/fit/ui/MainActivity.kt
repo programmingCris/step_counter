@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,11 +17,10 @@ import com.recrutation.fitsdktest.databinding.ActivityMainBinding
 import com.recrutation.fitsdktest.fit.abstr.DialogInterface
 import com.recrutation.fitsdktest.fit.dagger.AppModule
 import com.recrutation.fitsdktest.fit.dagger.DaggerAppComponent
-import com.recrutation.fitsdktest.fit.dialog.DialogService
 import com.recrutation.fitsdktest.fit.impl.FitClient
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FitClient.FitClientDelegate {
     private val  MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 102
     @Inject
     lateinit var client: FitClient
@@ -68,6 +69,13 @@ class MainActivity : AppCompatActivity() {
         client.fitPermissions.onPermissionsResult(requestCode, resultCode)
     }
 
+    private fun showExitDialog(){
+        dialogService.showExitDialog()
+        Handler(Looper.getMainLooper()).postDelayed({
+            finishAndRemoveTask()
+        }, 3000)
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -84,13 +92,21 @@ class MainActivity : AppCompatActivity() {
                         client.getTotalCount()
                     }
                     shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION) -> {
-                    dialogService.showPermissionDialog()
+                    dialogService.showPermissionDialog({ checkPermission() }, { showExitDialog() })
                     }
                     else -> {
-                        dialogService.showExitDialog()
+                        showExitDialog()
                     }
                 }
             }
         }
+    }
+
+    override fun onGoogleFitPermissionsDenied() {
+        dialogService.showGooglePermissionDialog()
+    }
+
+    override fun onFitError() {
+        dialogService.showErrorDialog()
     }
 }

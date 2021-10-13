@@ -19,7 +19,7 @@ import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class FitClient @Inject constructor(val activity: AppCompatActivity) : FitClientInterface,
+class FitClient @Inject constructor(val activity: AppCompatActivity, val delegate: FitClientDelegate?) : FitClientInterface,
     FitPermissions.PermissionDelegate {
     private val TAG = "FitClient"
     private val fitnessOptions = FitnessOptions.builder()
@@ -30,6 +30,7 @@ class FitClient @Inject constructor(val activity: AppCompatActivity) : FitClient
     val fitPermissions = FitPermissions(activity, account, fitnessOptions, this)
     private var totalCount = 0
     val mutableLiveData: MutableLiveData<Int> = MutableLiveData(totalCount)
+
 
     override fun getTotalCount() : Int {
         if(fitPermissions.checkPermissions()){
@@ -86,10 +87,12 @@ class FitClient @Inject constructor(val activity: AppCompatActivity) : FitClient
                     }
                     .addOnFailureListener{
                         Log.d(TAG, "getSensorsClientFailureListener")
+                        delegate?.onFitError()
                     }
             }
             .addOnFailureListener{
                 Log.d(TAG, "addOnFailureListener")
+                delegate?.onFitError()
             }
     }
 
@@ -98,6 +101,11 @@ class FitClient @Inject constructor(val activity: AppCompatActivity) : FitClient
     }
 
     override fun onPermissionsDenied() {
-        //show dialog
+        delegate?.onGoogleFitPermissionsDenied()
+    }
+
+    interface FitClientDelegate{
+        fun onGoogleFitPermissionsDenied()
+        fun onFitError()
     }
 }

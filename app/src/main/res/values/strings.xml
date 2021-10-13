@@ -4,4 +4,7 @@
     <string name="step_count_message">%d / %d kroków</string>
     <string name="attention_title">UWAGA</string>
     <string name="no_permissions_message">Brak uprawnień\nZa chwilę aplikacja zostanie zamknięta</string>
+    <string name="fir_error_message">Wystąpił błąd podczas\npobierania liczby kroków</string>
+    <string name="fit_permission_dialog_message">Brak uprawnień\ndo odczytania liczby kroków</string>
+    <string name="app_permission_dialog_message">Aplikacja potrzebuje uprawnień do odczytania liczby kroków.\nCzy chcesz teraz nadać uprawnienia?</string>
 </resources>

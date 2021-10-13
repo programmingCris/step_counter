@@ -32,6 +32,19 @@
             style="@style/BlueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_permissions_message" />
+            android:text="@string/fir_error_message" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/fit_error_ok_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppBtnStyle"
+                android:layout_margin="4dp"
+                android:text="@android:string/ok"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
