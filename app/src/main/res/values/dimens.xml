@@ -2,4 +2,5 @@
 <resources>
     <dimen name="circular_progress_image_size">120dp</dimen>
     <dimen name="circular_progress_size">240dp</dimen>
+    <dimen name="attention_anim_size">50dp</dimen>
 </resources>

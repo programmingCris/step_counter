@@ -3,6 +3,7 @@ package com.recrutation.fitsdktest.fit.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -54,6 +55,12 @@ class MainActivity : AppCompatActivity() {
         else{
             client.getTotalCount()
         }
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        theme.applyStyle(R.style.Theme_FitSDKTest, true)
+        return theme
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GrayTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/grayTextColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="BlueTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>

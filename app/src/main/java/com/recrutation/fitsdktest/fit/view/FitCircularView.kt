@@ -95,6 +95,9 @@ class FitCircularView : View{
 
     private fun calculateProgress(){
         progressPath.reset()
+        if(progress > max){
+            progress %= max
+        }
         val progressToShow = (360f * progress.toFloat() / max.toFloat())
         oval?.let { progressPath.addArc(it, START_ANGLE, progressToShow) }
     }

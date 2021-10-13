@@ -2,4 +2,6 @@
     <string name="app_name">FitSDKTest</string>
     <string name="step_count">Liczba kroków</string>
     <string name="step_count_message">%d / %d kroków</string>
+    <string name="attention_title">UWAGA</string>
+    <string name="no_permissions_message">Brak uprawnień\nZa chwilę aplikacja zostanie zamknięta</string>
 </resources>
