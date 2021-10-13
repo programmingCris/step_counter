@@ -1,4 +1,4 @@
-package com.recrutation.fitsdktest.fit.abstract
+package com.recrutation.fitsdktest.fit.abstr
 
 interface FitClientInterface {
     fun getTotalCount() : Int

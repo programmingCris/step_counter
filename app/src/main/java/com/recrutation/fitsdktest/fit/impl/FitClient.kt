@@ -12,13 +12,14 @@ import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.google.android.gms.fitness.request.SensorRequest
-import com.recrutation.fitsdktest.fit.abstract.FitClientInterface
+import com.recrutation.fitsdktest.fit.abstr.FitClientInterface
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class FitClient(private val activity: AppCompatActivity) : FitClientInterface,
+class FitClient @Inject constructor(val activity: AppCompatActivity) : FitClientInterface,
     FitPermissions.PermissionDelegate {
     private val TAG = "FitClient"
     private val fitnessOptions = FitnessOptions.builder()
@@ -60,7 +61,7 @@ class FitClient(private val activity: AppCompatActivity) : FitClientInterface,
                 val totalSteps = response.buckets
                     .flatMap { it.dataSets }
                     .flatMap { it.dataPoints }
-                    .sumOf<T>({ it.getValue(Field.FIELD_STEPS).asInt() })
+                    .sumOf{ it.getValue(Field.FIELD_STEPS).asInt() }
                 totalCount = totalSteps
                 mutableLiveData.postValue(totalCount)
                 Log.i(TAG, "Total steps: $totalSteps")
@@ -90,14 +91,6 @@ class FitClient(private val activity: AppCompatActivity) : FitClientInterface,
             .addOnFailureListener{
                 Log.d(TAG, "addOnFailureListener")
             }
-        /*Fitness.getRecordingClient(activity, account)
-            .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
-            .addOnSuccessListener {
-                Log.i(TAG,"Subscription was successful!")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "There was a problem subscribing ", e)
-            }*/
     }
 
     override fun onPermissionsSuccess() {

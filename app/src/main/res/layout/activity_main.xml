@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".fit.ui.MainActivity">
     <data>
         <variable
             name="vm"
-            type="com.recrutation.fitsdktest.MainViewModel" />
+            type="com.recrutation.fitsdktest.fit.ui.MainViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

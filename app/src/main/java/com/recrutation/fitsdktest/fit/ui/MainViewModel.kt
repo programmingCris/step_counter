@@ -1,4 +1,4 @@
-package com.recrutation.fitsdktest
+package com.recrutation.fitsdktest.fit.ui
 
 import androidx.lifecycle.ViewModel
 import com.recrutation.fitsdktest.fit.config.FitConfig

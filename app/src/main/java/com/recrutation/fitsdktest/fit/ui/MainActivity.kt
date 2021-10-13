@@ -1,4 +1,4 @@
-package com.recrutation.fitsdktest
+package com.recrutation.fitsdktest.fit.ui
 
 import android.Manifest
 import android.content.Intent
@@ -9,22 +9,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.recrutation.fitsdktest.R
 import com.recrutation.fitsdktest.databinding.ActivityMainBinding
+import com.recrutation.fitsdktest.fit.abstr.DialogInterface
+import com.recrutation.fitsdktest.fit.dagger.AppModule
+import com.recrutation.fitsdktest.fit.dagger.DaggerAppComponent
+import com.recrutation.fitsdktest.fit.dialog.DialogService
 import com.recrutation.fitsdktest.fit.impl.FitClient
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private val  MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 102
-    private lateinit var client: FitClient
+    @Inject
+    lateinit var client: FitClient
+    @Inject
+    lateinit var dialogService: DialogInterface
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build().inject(this)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
         binding.vm = viewModel
-        client = FitClient(this)
         client.mutableLiveData.observe(this, {
             viewModel.actualCount = it
             binding.circularProgress.setCustomProgress(viewModel.actualCount)
@@ -66,22 +77,13 @@ class MainActivity : AppCompatActivity() {
                         client.getTotalCount()
                     }
                     shouldShowRequestPermissionRationale(Manifest.permission.ACTIVITY_RECOGNITION) -> {
-                    // In an educational UI, explain to the user why your app requires this
-                    // permission for a specific feature to behave as expected. In this UI,
-                    // include a "cancel" or "no thanks" button that allows the user to
-                    // continue using your app without granting the permission.
-                    showInContextUI()
-                }
+                    dialogService.showPermissionDialog()
+                    }
                     else -> {
-                        checkPermission()
+                        dialogService.showExitDialog()
                     }
                 }
             }
         }
-    }
-
-
-    private fun showInContextUI() {
-
     }
 }

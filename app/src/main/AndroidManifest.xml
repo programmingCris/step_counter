@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitSDKTest" >
         <activity
-            android:name=".MainActivity"
+            android:name=".fit.ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
