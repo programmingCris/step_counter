@@ -1,25 +1,35 @@
 package com.recrutation.fitsdktest
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.recrutation.fitsdktest.databinding.ActivityMainBinding
 import com.recrutation.fitsdktest.fit.impl.FitClient
-import java.security.Permission
 
 class MainActivity : AppCompatActivity() {
     private val  MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 102
     private lateinit var client: FitClient
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        setContentView(binding.root)
+        binding.vm = viewModel
         client = FitClient(this)
+        client.mutableLiveData.observe(this, {
+            viewModel.actualCount = it
+            binding.circularProgress.setCustomProgress(viewModel.actualCount)
+            binding.stepCountMessage.text = getString(R.string.step_count_message, viewModel.actualCount, viewModel.maxCount)
+        })
         checkPermission()
     }
 

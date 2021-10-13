@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CircleProgress">
-        <attr name="custom_trackColor" format="color"/>
-        <attr name="custom_progressColor" format="color"/>
-        <attr name="custom_progress" format="integer"/>
-        <attr name="custom_trackWidth" format="dimension"/>
-        <attr name="custom_max" format="integer"/>
+        <attr name="customTrackColor" format="color"/>
+        <attr name="customProgressColor" format="color"/>
+        <attr name="customProgress" format="reference"/>
+        <attr name="customTrackWidth" format="dimension"/>
+        <attr name="customMax" format="reference"/>
     </declare-styleable>
 </resources>

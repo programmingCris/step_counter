@@ -1,14 +1,9 @@
 package com.recrutation.fitsdktest.fit.view
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-
-import android.graphics.RectF
 import com.recrutation.fitsdktest.R
 
 
@@ -41,6 +36,23 @@ class FitCircularView : View{
         init(context, attrs)
     }
 
+    fun setCustomMax(customMax : Int){
+        this.max = customMax
+    }
+
+    fun getCustomMax(): Int{
+        return max
+    }
+
+    fun setCustomProgress(customProgress: Int){
+        this.progress = customProgress
+        invalidate()
+    }
+
+    fun getCustomProgress(): Int{
+        return progress
+    }
+
     private fun init(context: Context, attrs: AttributeSet){
         context.theme.obtainStyledAttributes(
             attrs,
@@ -48,11 +60,11 @@ class FitCircularView : View{
             0, 0).apply {
 
             try {
-                progressPaint.color = getColor(R.styleable.CircleProgress_custom_progressColor, Color.YELLOW)
-                trackPaint.color = getColor(R.styleable.CircleProgress_custom_trackColor, Color.GRAY)
-                progress = getInt(R.styleable.CircleProgress_custom_progress, 0)
-                trackWidth = getDimensionPixelSize(R.styleable.CircleProgress_custom_trackWidth, 0)
-                max = getInt(R.styleable.CircleProgress_custom_max, 1)
+                progressPaint.color = getColor(R.styleable.CircleProgress_customProgressColor, Color.YELLOW)
+                trackPaint.color = getColor(R.styleable.CircleProgress_customTrackColor, Color.GRAY)
+                progress = getInt(R.styleable.CircleProgress_customProgress, 0)
+                trackWidth = getDimensionPixelSize(R.styleable.CircleProgress_customTrackWidth, 0)
+                max = getInt(R.styleable.CircleProgress_customMax, 1)
             } finally {
                 recycle()
             }
