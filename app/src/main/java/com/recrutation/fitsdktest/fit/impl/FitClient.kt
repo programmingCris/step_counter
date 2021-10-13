@@ -1,7 +1,6 @@
 package com.recrutation.fitsdktest.fit.impl
 
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -77,9 +76,8 @@ class FitClient @Inject constructor(val activity: AppCompatActivity, val delegat
                             val value = it.getValue(item)
                             Log.d(TAG, "field ${item.name}")
                             Log.d(TAG, "field count  $value")
-                            totalCount.plus(value.asInt())
+                            totalCount += value.asInt()
                             mutableLiveData.postValue(totalCount)
-                            Toast.makeText(activity, "AAAA $value", Toast.LENGTH_SHORT).show()
                         }
                     }
                     .addOnSuccessListener {
